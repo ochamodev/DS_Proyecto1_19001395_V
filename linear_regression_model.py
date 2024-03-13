@@ -4,3 +4,4 @@ from dataclasses import dataclass
 class LinearRegresionModel:
     yPred: float
     iteration: int
+    betas: list[float]
