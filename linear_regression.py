@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from linear_regression_model import LinearRegresionModel
+from sklearn import linear_model
 
 
 class LinearRegressionScratch:
@@ -78,6 +79,7 @@ class LinearRegressionScratch:
         plt.xticks(np.arange(0, len(errors), step=1))
         plt.plot(errors)
         plt.tight_layout()
+        plt.title("Change of error across time")
         plt.show()
 
     def plot_trained_model(self, models: list[LinearRegresionModel], n: int):
@@ -96,7 +98,12 @@ class LinearRegressionScratch:
         plt.xticks(np.arange(0, len(models), step=n))
         plt.plot([x.yPred for x in dataToPlot])
         plt.tight_layout()
+        plt.title("Evolution of model training across time")
         plt.show()
 
-    def predict(self):
-        pass
+    def predict_comparison(self, x, manuallyTrainedModel: LinearRegresionModel, sciKitModel: linear_model.LinearRegression):
+        onesArray = np.ones_like(x)
+        #betas = np.reshape(manuallyTrainedModel.betas, (2, 1))
+        betas = manuallyTrainedModel.betas
+        manualPrediction = np.dot(np.column_stack((x, onesArray)), betas)
+        print(f"manualPred = {manualPrediction}")
