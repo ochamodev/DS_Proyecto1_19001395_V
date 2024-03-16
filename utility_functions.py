@@ -26,3 +26,11 @@ def plotScatterPlot(args: CorrelationPlotArgs):
 
 def printCorrelation(colName: str, correlation: float):
     print(f"Correlation for {colName} = {correlation:.4f}")
+
+def histogramErrors(y: np.ndarray, title: str):
+    xTicksLabels = ['ManuallyTrained', 'ScikitModel', 'AvgModel']
+    fig, ax = plt.subplots(1, 1)
+    ax.plot(xTicksLabels, y)
+    ax.set_xticks(xTicksLabels)
+    ax.set_xticklabels(xTicksLabels, rotation='vertical', fontsize=18)
+    ax.set_title(title)

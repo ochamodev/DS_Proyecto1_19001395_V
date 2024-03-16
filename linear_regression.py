@@ -20,6 +20,13 @@ class LinearRegressionScratch:
         #print(f"error with loop {errorSum}")
         return errorNpSum
     
+    def calculate_rmse(self, y: np.ndarray, yPred: np.ndarray, n: int):
+        resultSubstraction = np.sum((yPred - y)** 2)
+        division = (1 / n)
+        resultSum = division * resultSubstraction
+        resultSqrt = np.sqrt(resultSum)
+        return resultSum
+
     def calculate_gradient_b1(self, yPred: np.ndarray, y: np.ndarray, x: np.ndarray, n: int):
         substraction = (yPred - y) * x
         resultSum = np.sum(substraction)
@@ -103,7 +110,11 @@ class LinearRegressionScratch:
 
     def predict_comparison(self, x, manuallyTrainedModel: LinearRegresionModel, sciKitModel: linear_model.LinearRegression):
         onesArray = np.ones_like(x)
-        #betas = np.reshape(manuallyTrainedModel.betas, (2, 1))
         betas = manuallyTrainedModel.betas
         manualPrediction = np.dot(np.column_stack((x, onesArray)), betas)
-        print(f"manualPred = {manualPrediction}")
+        scikitPrediction = sciKitModel.predict(x.reshape(-1, 1))
+        avgPrediction = (manualPrediction + scikitPrediction) / manualPrediction.size
+
+        return manualPrediction, scikitPrediction, avgPrediction
+        
+
