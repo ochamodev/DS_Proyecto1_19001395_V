@@ -25,7 +25,7 @@ class LinearRegressionScratch:
         division = (1 / n)
         resultSum = division * resultSubstraction
         resultSqrt = np.sqrt(resultSum)
-        return resultSum
+        return resultSqrt
 
     def calculate_gradient_b1(self, yPred: np.ndarray, y: np.ndarray, x: np.ndarray, n: int):
         substraction = (yPred - y) * x
